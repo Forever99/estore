@@ -37,6 +37,10 @@ public class TransactionUtil {
 	//  这里, 获得一个 connection  对象 
 	public static Connection getConnection(){
 		try {
+//			说明：先判断tl.get()是否是null，
+//			如果是null，则说明当前线程还没有对应的Connection对象，这时创建一个Connection对象并添加到本地线程变量中；
+//			如果不为null，则说明当前的线程已经拥有了Connection对象，直接使用就可以了。
+//			这样，就保证了不同的线程使用线程相关的Connection，而不会使用其它线程的Connection
 			Connection conn = tl.get();
 			if(conn==null){
 				//从数据连接池 中 取 一个连接 出来 
@@ -65,7 +69,7 @@ public class TransactionUtil {
 			throw new RuntimeException(e);
 		}
 	}
-	public static void rollback(){
+	public static void rollback(){//回滚事务
 		try {
 			Connection conn = tl.get();
 			if(conn==null){
@@ -77,7 +81,7 @@ public class TransactionUtil {
 			throw new RuntimeException(e);
 		}
 	}
-	public static void commit(){
+	public static void commit(){//提交事务
 		try {
 			Connection conn = tl.get();
 			if(conn==null){
@@ -89,7 +93,7 @@ public class TransactionUtil {
 			throw new RuntimeException(e);
 		}
 	}
-	public static void relase(){
+	public static void relase(){//释放资源进
 		try {
 			Connection conn = tl.get();
 			if(conn!=null){
