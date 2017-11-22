@@ -8,10 +8,12 @@ estore简版商城    【2017.11.16--2017.11.18完成】
   1、首先必须修改tomcat服务器端口为80，
   2、然后在C:\Windows\System32\drivers\etc目录下：找到hosts文件，进入到 hosts 文件中 添加主机名与ip地址对应关系：127.0.0.1 www.estore.com, 
   3、接着，到 tomcat服务器的server.xml文件中,  添加 Host元素：
+  【
  	<Host name="www.estore.com"  appBase="D:\myeclipse_workspace\estore"
             unpackWARs="true" autoDeploy="true">
 			<Context path="" docBase="D:\myeclipse_workspace\estore\WebRoot"/>
 	</Host>
+   】
 	将 www.estore.com 映射指向了 硬盘上的： D:\myeclipse_workspace\estore（estore在myeclipse中的位置）
 	然后又将 这个文件夹下的：D:\myeclipse_workspace\estore\WebRoot（estore在的WebRoot里面的结构就是一个web应用里面的结构，所以此处相当于estore的web应用在myeclipse中的位置）
 
